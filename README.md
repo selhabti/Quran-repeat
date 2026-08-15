@@ -1,56 +1,98 @@
-# Welcome to your Expo app 👋
+# رحلتي مع القرآن — Quran-Repeat
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Application de suivi des récitations coraniques. Comptez et mémorisez combien de fois vous avez récité chacune des 114 sourates du Coran, avec un objectif de 100 récitations par sourate. Les données sont sauvegardées **localement** (AsyncStorage) et persistent entre les sessions — sur mobile comme dans le navigateur (localStorage), indépendamment pour chaque appareil.
 
-## Get started
+## Stack technique
 
-1. Install dependencies
+| Élément | Technologie |
+| --- | --- |
+| Framework | React Native + Expo (SDK 57) |
+| Langage | TypeScript |
+| Routage | Expo Router |
+| Stockage local | AsyncStorage |
+| Icônes | @expo/vector-icons (MaterialIcons) |
+| Dégradés | expo-linear-gradient |
+| Safe area | react-native-safe-area-context |
+| Police arabe | Amiri (@expo-google-fonts/amiri) |
 
-   ```bash
-   npm install
-   ```
+## Fonctionnalités
 
-2. Start the app
+- Header en dégradé vert islamique `#00796B → #004D40`
+- Statistiques en temps réel : total de récitations, sourates complétées, pourcentage global
+- Barre de progression globale dorée `#D4AF37`
+- 114 sourates en cartes blanches avec ombre
+- Barre de progression individuelle avec code couleur :
 
-   ```bash
-   npx expo start
-   ```
+| Étape | Récitations | Couleur |
+| --- | --- | --- |
+| Début | 0 – 29 | Gris `#BDBDBD` |
+| Avancement | 30 – 69 | Vert `#4CAF50` |
+| Proche du but | 70 – 99 | Orange `#FF9800` |
+| Complété | 100 | Rouge `#F44336` |
 
-In the output, you'll find options to open the app in a
+- Bouton `+ تلاوة` pour incrémenter (bloqué à 100)
+- Étoile or + coche sur les sourates complétées
+- Animation spring au toucher
+- Réinitialisation par sourate ou totale
+- Spinner pendant le chargement initial
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Démarrage en local
 
 ```bash
-npm run reset-project
+npm install
+npm run web      # version navigateur
+npm start        # Expo Go sur téléphone (QR code)
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Déploiement sur GitHub Pages
 
-### Other setup steps
+L'application se déploie automatiquement via GitHub Actions sur chaque push vers `main`.
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+### 1. Nom du dépôt et baseUrl
 
-## Learn more
+GitHub Pages sert le site sous `https://selhabti.github.io/Quran-repeat/`. Le `baseUrl` est donc configuré dans `app.json` :
 
-To learn more about developing your project with Expo, look at the following resources:
+```json
+"experiments": {
+  "baseUrl": "/Quran-repeat"
+}
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+⚠️ **Si ton dépôt s'appelle autrement** (ex. `quran-repeat` ou `mon-app`), modifie cette valeur pour qu'elle corresponde **exactement** au nom du dépôt (majuscules/minuscules comprises), puis recommitte.
 
-## Join the community
+### 2. Pousser le dépôt
 
-Join our community of developers creating universal apps.
+```bash
+git remote add origin https://github.com/selhabti/Quran-repeat.git
+git push -u origin main
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### 3. Activer GitHub Pages
+
+1. Va dans **Settings** du dépôt → **Pages**.
+2. **Source** : sélectionne **GitHub Actions**.
+3. Le workflow `Deploy to GitHub Pages` se lance à chaque push. Vérifie sa progression dans l'onglet **Actions**.
+
+L'app sera disponible à l'adresse `https://selhabti.github.io/Quran-repeat/`.
+
+### 4. Partager le lien
+
+Quiconque ouvre le lien voit ses **propres** compteurs : les données sont stockées dans le localStorage du navigateur (ou la mémoire de l'appareil) de chaque visiteur, jamais sur un serveur.
+
+## Structure du projet
+
+```
+src/
+├── app/
+│   ├── _layout.tsx        # Layout racine : polices, providers, Stack
+│   └── index.tsx          # Écran principal (liste des sourates)
+├── components/
+│   ├── Header.tsx         # Dégradé + stats + barre globale
+│   └── SurahCard.tsx      # Carte de sourate (progression + incrément)
+├── constants/
+│   └── theme.ts           # Palette, couleurs de progression
+├── context/
+│   └── RecitationContext.tsx  # État global + persistance AsyncStorage
+└── data/
+    └── surahs.ts          # Les 114 sourates
+```

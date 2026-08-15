@@ -1,55 +1,42 @@
-/**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
- */
-
-import '@/global.css';
-
-import { Platform } from 'react-native';
-
 export const Colors = {
-  light: {
-    text: '#000000',
-    background: '#ffffff',
-    backgroundElement: '#F0F0F3',
-    backgroundSelected: '#E0E1E6',
-    textSecondary: '#60646C',
-  },
-  dark: {
-    text: '#ffffff',
-    background: '#000000',
-    backgroundElement: '#212225',
-    backgroundSelected: '#2E3135',
-    textSecondary: '#B0B4BA',
-  },
+  headerStart: '#00796B',
+  headerEnd: '#004D40',
+  gold: '#D4AF37',
+  background: '#F5F5F5',
+  card: '#FFFFFF',
+  badgeGreen: '#4DB6AC',
+  gray: '#BDBDBD',
+  green: '#4CAF50',
+  orange: '#FF9800',
+  red: '#F44336',
+  text: '#212121',
+  textSecondary: '#757575',
+  white: '#FFFFFF',
+  buttonGreen: '#2E7D32',
 } as const;
 
-export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
+export type ProgressStage = 'start' | 'progress' | 'near' | 'complete';
 
-export const Fonts = Platform.select({
-  ios: {
-    /** iOS `UIFontDescriptorSystemDesignDefault` */
-    sans: 'system-ui',
-    /** iOS `UIFontDescriptorSystemDesignSerif` */
-    serif: 'ui-serif',
-    /** iOS `UIFontDescriptorSystemDesignRounded` */
-    rounded: 'ui-rounded',
-    /** iOS `UIFontDescriptorSystemDesignMonospaced` */
-    mono: 'ui-monospace',
-  },
-  default: {
-    sans: 'normal',
-    serif: 'serif',
-    rounded: 'normal',
-    mono: 'monospace',
-  },
-  web: {
-    sans: 'var(--font-display)',
-    serif: 'var(--font-serif)',
-    rounded: 'var(--font-rounded)',
-    mono: 'var(--font-mono)',
-  },
-});
+export function progressStage(count: number, target: number): ProgressStage {
+  if (count >= target) return 'complete';
+  if (count >= target * 0.7) return 'near';
+  if (count >= target * 0.3) return 'progress';
+  return 'start';
+}
+
+export function progressColor(count: number, target: number): string {
+  const stage = progressStage(count, target);
+  switch (stage) {
+    case 'complete':
+      return Colors.red;
+    case 'near':
+      return Colors.orange;
+    case 'progress':
+      return Colors.green;
+    default:
+      return Colors.gray;
+  }
+}
 
 export const Spacing = {
   half: 2,
@@ -58,8 +45,6 @@ export const Spacing = {
   three: 16,
   four: 24,
   five: 32,
-  six: 64,
 } as const;
 
-export const BottomTabInset = Platform.select({ ios: 50, android: 80 }) ?? 0;
 export const MaxContentWidth = 800;
