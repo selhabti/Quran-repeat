@@ -20,6 +20,11 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
+      "name": "رحلتي مع القرآن",
+      "shortName": "القرآن",
+      "themeColor": "#00796B",
+      "backgroundColor": "#00796B",
+      "orientation": "portrait",
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },

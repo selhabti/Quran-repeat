@@ -80,6 +80,13 @@ L'app sera disponible à l'adresse `https://selhabti.github.io/Quran-repeat/`.
 
 Quiconque ouvre le lien voit ses **propres** compteurs : les données sont stockées dans le localStorage du navigateur (ou la mémoire de l'appareil) de chaque visiteur, jamais sur un serveur.
 
+## Installer sur un téléphone (PWA)
+
+L'app est une PWA (manifest + icônes + thème) : elle s'installe sur l'écran d'accueil et s'ouvre plein écran comme une vraie app, avec ses données conservées.
+
+- **Android (Chrome)** : ouvrir `https://selhabti.github.io/Quran-repeat/` → menu ⋮ → **« Ajouter à l'écran d'accueil »** (ou « Installer l'application »).
+- **iPhone / iPad (Safari)** : ouvrir le lien → bouton **Partager** → **« Sur l'écran d'accueil »**.
+
 ## Structure du projet
 
 ```
