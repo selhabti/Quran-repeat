@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#FFFFFF"/>
+  <defs>
+    <linearGradient id="emerald" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#10B981"/>
+      <stop offset="1" stop-color="#047857"/>
+    </linearGradient>
+    <linearGradient id="pageShade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#E7F7F1"/>
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(256 262)">
+    <ellipse cx="0" cy="168" rx="220" ry="40" fill="#0B3D2E" opacity="0.15"/>
+  </g>
+
+  <g transform="translate(256 224)">
+    <path d="M-208 -140 Q-104 -168 0 -140 L0 148 Q-104 176 -208 148 Z" fill="url(#emerald)"/>
+    <path d="M208 -140 Q104 -168 0 -140 L0 148 Q104 176 208 148 Z" fill="url(#emerald)"/>
+    <rect x="4" y="-130" width="196" height="266" rx="10" fill="url(#pageShade)"/>
+    <rect x="-200" y="-130" width="196" height="266" rx="10" fill="#F4FBF8"/>
+    <line x1="4" y1="-114" x2="200" y2="-114" stroke="#D1FAE5" stroke-width="6" stroke-linecap="round"/>
+    <line x1="4" y1="-94" x2="200" y2="-94" stroke="#D1FAE5" stroke-width="6" stroke-linecap="round"/>
+    <line x1="4" y1="-74" x2="200" y2="-74" stroke="#D1FAE5" stroke-width="6" stroke-linecap="round"/>
+    <line x1="4" y1="-54" x2="200" y2="-54" stroke="#D1FAE5" stroke-width="6" stroke-linecap="round"/>
+    <line x1="4" y1="-34" x2="200" y2="-34" stroke="#D1FAE5" stroke-width="6" stroke-linecap="round"/>
+    <line x1="4" y1="-14" x2="200" y2="-14" stroke="#D1FAE5" stroke-width="6" stroke-linecap="round"/>
+    <line x1="4" y1="6" x2="200" y2="6" stroke="#D1FAE5" stroke-width="6" stroke-linecap="round"/>
+    <line x1="-200" y1="-114" x2="-4" y2="-114" stroke="#D1FAE5" stroke-width="6" stroke-linecap="round"/>
+    <line x1="-200" y1="-94" x2="-4" y2="-94" stroke="#D1FAE5" stroke-width="6" stroke-linecap="round"/>
+    <line x1="-200" y1="-74" x2="-4" y2="-74" stroke="#D1FAE5" stroke-width="6" stroke-linecap="round"/>
+    <line x1="-200" y1="-54" x2="-4" y2="-54" stroke="#D1FAE5" stroke-width="6" stroke-linecap="round"/>
+    <line x1="-200" y1="-34" x2="-4" y2="-34" stroke="#D1FAE5" stroke-width="6" stroke-linecap="round"/>
+    <line x1="-200" y1="-14" x2="-4" y2="-14" stroke="#D1FAE5" stroke-width="6" stroke-linecap="round"/>
+    <line x1="-200" y1="6" x2="-4" y2="6" stroke="#D1FAE5" stroke-width="6" stroke-linecap="round"/>
+    <path d="M0 -140 C 16 -132 16 132 0 148" fill="none" stroke="#065F46" stroke-width="10"/>
+    <path d="M-8 -110 Q0 -102 8 -110 M-8 -60 Q0 -52 8 -60 M-8 -10 Q0 -2 8 -10" fill="none" stroke="#10B981" stroke-width="6" stroke-linecap="round"/>
+  </g>
+</svg>
