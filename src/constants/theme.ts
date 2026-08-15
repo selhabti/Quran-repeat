@@ -28,13 +28,13 @@ export function progressColor(count: number, target: number): string {
   const stage = progressStage(count, target);
   switch (stage) {
     case 'complete':
-      return Colors.red;
+      return Colors.gold;
     case 'near':
-      return Colors.orange;
-    case 'progress':
       return Colors.green;
+    case 'progress':
+      return Colors.orange;
     default:
-      return Colors.gray;
+      return Colors.red;
   }
 }
 

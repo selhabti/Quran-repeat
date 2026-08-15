@@ -18,6 +18,7 @@ Application de suivi des récitations coraniques. Comptez et mémorisez combien 
 ## Fonctionnalités
 
 - Header en dégradé vert islamique `#00796B → #004D40`
+- Saisie du prénom (affiché dans l'en-tête) avec persistance locale
 - Statistiques en temps réel : total de récitations, sourates complétées, pourcentage global
 - Barre de progression globale dorée `#D4AF37`
 - 114 sourates en cartes blanches avec ombre
@@ -25,10 +26,10 @@ Application de suivi des récitations coraniques. Comptez et mémorisez combien 
 
 | Étape | Récitations | Couleur |
 | --- | --- | --- |
-| Début | 0 – 29 | Gris `#BDBDBD` |
-| Avancement | 30 – 69 | Vert `#4CAF50` |
-| Proche du but | 70 – 99 | Orange `#FF9800` |
-| Complété | 100 | Rouge `#F44336` |
+| Début | 0 – 29 | Rouge `#F44336` |
+| Avancement | 30 – 69 | Orange `#FF9800` |
+| Proche du but | 70 – 99 | Vert `#4CAF50` |
+| Complété | 100 | Or `#D4AF37` |
 
 - Bouton `+ تلاوة` pour incrémenter (bloqué à 100)
 - Étoile or + coche sur les sourates complétées

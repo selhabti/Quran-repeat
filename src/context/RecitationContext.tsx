@@ -11,7 +11,8 @@ import {
 
 import { SURAH_TARGET, surahs } from '@/data/surahs';
 
-const STORAGE_KEY = '@quran-repeat/counts:v1';
+const COUNTS_KEY = '@quran-repeat/counts:v1';
+const PROFILE_KEY = '@quran-repeat/profile:v1';
 
 export type Counts = Record<number, number>;
 
@@ -24,22 +25,31 @@ type RecitationContextValue = {
   increment: (surahNumber: number) => void;
   resetSurah: (surahNumber: number) => void;
   resetAll: () => void;
+  name: string;
+  setName: (name: string) => void;
 };
 
 const RecitationContext = createContext<RecitationContextValue | null>(null);
 
 export function RecitationProvider({ children }: { children: ReactNode }) {
   const [counts, setCounts] = useState<Counts>({});
+  const [name, setNameState] = useState('');
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     let active = true;
     (async () => {
       try {
-        const raw = await AsyncStorage.getItem(STORAGE_KEY);
-        if (raw && active) {
-          const parsed = JSON.parse(raw) as Counts;
-          setCounts(parsed);
+        const [rawCounts, rawProfile] = await Promise.all([
+          AsyncStorage.getItem(COUNTS_KEY),
+          AsyncStorage.getItem(PROFILE_KEY),
+        ]);
+        if (active && rawCounts) {
+          setCounts(JSON.parse(rawCounts) as Counts);
+        }
+        if (active && rawProfile) {
+          const profile = JSON.parse(rawProfile) as { name?: string };
+          if (profile?.name) setNameState(profile.name);
         }
       } catch (error) {
         console.warn('Impossible de charger les données', error);
@@ -52,8 +62,15 @@ export function RecitationProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
+  const setName = useCallback((value: string) => {
+    setNameState(value);
+    AsyncStorage.setItem(PROFILE_KEY, JSON.stringify({ name: value })).catch((error) => {
+      console.warn('Impossible de sauvegarder le prénom', error);
+    });
+  }, []);
+
   const persist = useCallback((next: Counts) => {
-    AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next)).catch((error) => {
+    AsyncStorage.setItem(COUNTS_KEY, JSON.stringify(next)).catch((error) => {
       console.warn('Impossible de sauvegarder les données', error);
     });
   }, []);
@@ -111,8 +128,10 @@ export function RecitationProvider({ children }: { children: ReactNode }) {
       increment,
       resetSurah,
       resetAll,
+      name,
+      setName,
     }),
-    [counts, loaded, stats, increment, resetSurah, resetAll],
+    [counts, loaded, stats, increment, resetSurah, resetAll, name, setName],
   );
 
   return <RecitationContext.Provider value={value}>{children}</RecitationContext.Provider>;

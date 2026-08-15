@@ -104,7 +104,7 @@ export function SurahCard({ surah, count, onIncrement, onReset }: SurahCardProps
                 </>
               ) : (
                 <>
-                  <Text style={styles.incrementText}>+</Text>
+                  <MaterialIcons name="add" size={22} color={Colors.white} />
                   <Text style={styles.incrementText}>تلاوة</Text>
                 </>
               )}
